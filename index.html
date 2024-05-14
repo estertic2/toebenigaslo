@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo_portala.css">
+    <title>Piedra, Papel, Tijera</title>
+
+</head>
+<body>
+    <h1>Piedra, papel o tijera</h1>
+    <div class="image-container">
+        <img src="juegokakashi.gif" width="200px">
+    </div>
+    <div class="options">
+        <button onclick="play('piedra')">
+            <img src="rock.png" alt="Piedra"><br>
+            Piedra
+        </button>
+        <button onclick="play('papel')">
+            <img src="papper.png" alt="Papel"><br>
+            Papel
+        </button>
+        <button onclick="play('tijera')">
+            <img src="scissor.png" alt="Tijera"><br>
+            Tijera
+        </button>
+    </div>
+    <div id="result"></div>
+
+    <script>
+        // Función para generar la jugada de la computadora
+        function computerPlay() {
+            const options = ['piedra', 'papel', 'tijera'];
+            const randomIndex = Math.floor(Math.random() * 3);
+            return options[randomIndex];
+        }
+
+        // Función para determinar el resultado del juego
+        function play(playerSelection) {
+            const computerSelection = computerPlay();
+
+            let result;
+            if (playerSelection === computerSelection) {
+                result = "¡Es un empate!";
+            } else if (
+                (playerSelection === 'piedra' && computerSelection === 'tijera') ||
+                (playerSelection === 'papel' && computerSelection === 'piedra') ||
+                (playerSelection === 'tijera' && computerSelection === 'papel')
+            ) {
+                result = "¡Ganaste!";
+            } else {
+                result = "¡Perdiste!";
+            }
+
+            document.getElementById('result').innerText = `Elegiste ${playerSelection}, la computadora eligió ${computerSelection}. ${result}`;
+        }
+    </script>
+</body>
+</html>
